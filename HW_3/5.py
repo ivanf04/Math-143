@@ -57,3 +57,20 @@ a_2 = result[2]
 
 B_error = np.sum((y - (a_2*x**2 + a_1*x + a_0))**2)
 print(f"Error for 5 B:\n{B_error}")
+
+"""
+work for 5D, least squares for exponential function 
+"""
+y_i = np.log(y)
+
+sum_ln_y = np.sum(y_i)
+x_lny = np.sum(y_i * x)
+
+ln_solution_matrix = np.array([x_lny, sum_ln_y])
+
+a_c = np.linalg.solve(a_1_matrix, ln_solution_matrix)
+b_5D = np.exp(a_c[1])
+a_5D = np.exp(a_c[0] * x)
+error_5_D = np.sum((y - (b_5D * a_5D))** 2)
+print(f"Solution to 5D:\n{a_c}")
+print(f"Error in 5D:\n{error_5_D}")
